@@ -3,6 +3,5 @@ streamlit
 openai
 tiktoken
 pypdf
-os
 tempfile
 Textwrap
