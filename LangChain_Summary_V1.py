@@ -37,7 +37,7 @@ if uploaded_file is not None:
     with open(temp_file_path, "wb") as temp_file:
         temp_file.write(uploaded_file.read())
 
-    # st.write("Full path of the uploaded file:", temp_file_path)
+    st.write("Full path of the uploaded file:", temp_file_path)
 
     loader = PyPDFLoader(temp_file_path)
     documents = loader.load()
