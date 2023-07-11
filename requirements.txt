@@ -3,3 +3,4 @@ streamlit
 openai
 tiktoken
 PyPDF2==3.0.1
+pypdf
