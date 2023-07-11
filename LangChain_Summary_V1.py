@@ -17,7 +17,6 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains.mapreduce import MapReduceChain
 from langchain.chains.summarize import load_summarize_chain
 import textwrap
-import pypdf
 import tiktoken
 
 API_KEY = st.secrets['OPENAI_API_KEY']
