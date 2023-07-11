@@ -28,8 +28,9 @@ st.header("Summarize your PDF files")
 uploaded_file = st.file_uploader('Upload your files', type=(['pdf']))
 
 temp_file_path = os.getcwd()
-# while uploaded_file is None:
-#     x = 1      
+while uploaded_file is None:
+    x = 1      
+    
 if uploaded_file is not None:
     # Save the uploaded file to a temporary location
     temp_dir = tempfile.TemporaryDirectory()
