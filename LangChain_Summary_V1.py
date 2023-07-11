@@ -17,6 +17,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains.mapreduce import MapReduceChain
 from langchain.chains.summarize import load_summarize_chain
 import textwrap
+import pypdf
 import tiktoken
 
 API_KEY = st.secrets['OPENAI_API_KEY']
@@ -30,7 +31,7 @@ uploaded_file = st.file_uploader('Upload your files', type=(['pdf']))
 temp_file_path = os.getcwd()
 while uploaded_file is None:
     x = 1      
-    
+
 if uploaded_file is not None:
     # Save the uploaded file to a temporary location
     temp_dir = tempfile.TemporaryDirectory()
