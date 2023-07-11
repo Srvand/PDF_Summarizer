@@ -24,7 +24,6 @@ os.environ["OPENAI_API_KEY"] = API_KEY
     # # print('Hello')
 st.set_page_config(page_title="PDF Summarizer")
 st.header("Summarize your PDF files")
-# load_dotenv()
 uploaded_file = st.file_uploader('Upload your files', type=(['pdf']))
 
 temp_file_path = os.getcwd()
@@ -38,19 +37,12 @@ if uploaded_file is not None:
     with open(temp_file_path, "wb") as temp_file:
         temp_file.write(uploaded_file.read())
 
-    st.write("Full path of the uploaded file:", temp_file_path)
+    # st.write("Full path of the uploaded file:", temp_file_path)
 
     loader = PyPDFLoader(temp_file_path)
     documents = loader.load()
-    st.write(len(documents))
 
     llm=ChatOpenAI(model_name="gpt-3.5-turbo-16k")#gpt-3.5-turbo-16k
-    # text_splitter = CharacterTextSplitter(
-    # separator = "\n",
-    # chunk_size = 1000,
-    # chunk_overlap  =    0, #striding over the text
-    # length_function = len)
-    # docs = text_splitter.split_documents(documents)
     
     # Tokens details
     tokenizer = tiktoken.get_encoding('cl100k_base')
@@ -62,7 +54,6 @@ if uploaded_file is not None:
         )
         return len(tokens)
     token_counts = [tiktoken_len(doc.page_content) for doc in documents]
-    st.write(token_counts)
 
     text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000,
@@ -71,21 +62,7 @@ if uploaded_file is not None:
     separators=['\n\n', '\n', ' ', ''] 
     )
 
-    chunks = text_splitter.split_documents(documents)
-    st.write(len(chunks))
-    total_len=0
-    # st.write(chunks[0].page_content)
-    # st.write(tiktoken_len(chunks[0]), tiktoken_len(chunks[1]),tiktoken_len(chunks[2]))
-    for i in range(len(chunks)):
-        st.write(i)
-        st.write(tiktoken_len(chunks[i].page_content))
-        total_len+=tiktoken_len(chunks[i].page_content)
-    st.write(total_len)    
-
-    # chunks = text_splitter.split_text(documents[1].page_content)
-    # st.write(len(chunks))
-    # # st.write(chunks[0])
-    # st.write(tiktoken_len(chunks[2]))
+    chunks = text_splitter.split_documents(documents) 
 
     # Custom prompt
     prompt_template = """Write a concise bullet point summary of the following:
