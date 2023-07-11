@@ -41,7 +41,7 @@ if uploaded_file is not None:
     st.write("Full path of the uploaded file:", temp_file_path)
 
     loader = PyPDFLoader(temp_file_path)
-    documents = loader.load_and_split()
+    documents = loader.load()
     st.write(len(documents))
 
     llm=ChatOpenAI(model_name="gpt-3.5-turbo-16k")#gpt-3.5-turbo-16k
